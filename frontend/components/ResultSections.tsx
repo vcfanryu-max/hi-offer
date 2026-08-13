@@ -23,10 +23,12 @@ export function ResultSections({
   generation,
   retrying,
   onRetry,
+  demo = false,
 }: {
   generation: Generation;
   retrying: string | null;
   onRetry: (module: "match" | "hr-message" | "resume-advice") => void;
+  demo?: boolean;
 }) {
   const matchText = generation.match_result ? formatMatch(generation.match_result) : "";
   const adviceText = generation.resume_advice ? formatAdvice(generation.resume_advice, generation) : "";
@@ -34,7 +36,7 @@ export function ResultSections({
   return (
     <section className="results" aria-label="生成结果">
       <div className="result-heading">
-        <span>生成完成后，结果会自动保存到用户档案</span>
+        <span>{demo ? "虚构示例数据 · 预生成结果" : "生成完成后，结果会自动保存到用户档案"}</span>
         <span className="snapshot-id">SNAPSHOT #{generation.id}</span>
       </div>
 
@@ -106,7 +108,7 @@ export function ResultSections({
       </article>
 
       <p className="wish-line">祝大家在平庸的时候不贫困，贫困的时候不平庸</p>
-      <div className="generation-download"><a className="text-button" href={downloadUrl(`/api/generations/${generation.id}/export/generation`)}>下载完整 Generation</a></div>
+      {!demo && <div className="generation-download"><a className="text-button" href={downloadUrl(`/api/generations/${generation.id}/export/generation`)}>下载完整 Generation</a></div>}
       {generation.debug_enabled && generation.debug_traces && <DebugPanel traces={generation.debug_traces} />}
     </section>
   );
