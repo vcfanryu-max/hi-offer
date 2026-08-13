@@ -138,6 +138,21 @@ API 健康检查位于 [http://127.0.0.1:8000/api/health](http://127.0.0.1:8000/
 
 ## 部署说明
 
+### Docker Compose（单用户/私有环境）
+
+复制配置示例，并按实际域名修改前端 API 地址和后端 CORS 白名单。
+
+```bash
+cp .env.example .env
+docker compose up --build -d
+```
+
+默认前端位于 `http://localhost:3000`，后端健康检查位于
+`http://localhost:8000/api/health`。运行数据保存在 Docker 命名卷中。
+`NEXT_PUBLIC_API_BASE` 会在前端构建时写入浏览器包，修改后需要重新构建前端镜像。
+
+> 当前应用没有登录、多租户和用户数据隔离。该配置只适合个人或受信任的私有环境，不能据此直接开放为多人公共服务。
+
 当前版本无法直接部署到 Streamlit Community Cloud。它包含一个 Next.js 前端和一个 FastAPI 后端，需要 Node.js 与 Python 两个常驻进程；仓库也没有 Streamlit 入口文件。添加一个空的 `streamlit_app.py` 不能让这套网页在 Streamlit 上运行。
 
 这个发布包适合上传到 GitHub，也适合在本机或能同时运行 Node.js 与 Python 的主机上启动。远程部署至少要处理这些事项。
@@ -170,4 +185,3 @@ npm.cmd --prefix frontend run build
 - 自定义 Provider 必须兼容 OpenAI Chat Completions 接口，并使用 HTTPS。
 - Local-first 适合个人本地使用。远程多人服务需要另做安全设计。
 - 仓库暂未附带开源许可证。公开可见不等于自动授予复制、修改或再发布权利。
-
