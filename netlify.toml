@@ -1,8 +1,9 @@
 [build]
   base = "frontend"
   command = "npm run build"
-  publish = ".next"
+  publish = "out"
 
 [build.environment]
   NODE_VERSION = "20"
   NEXT_PUBLIC_DEMO_MODE = "true"
+  NETLIFY_NEXT_PLUGIN_SKIP = "true"
