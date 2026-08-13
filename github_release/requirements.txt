@@ -1,0 +1,13 @@
+fastapi>=0.116,<1
+httpx>=0.28,<1
+keyring>=25.6,<27
+pymupdf>=1.26,<2
+pydantic>=2.11,<3
+pypdf>=6,<7
+python-docx>=1.2,<2
+python-multipart>=0.0.20,<1
+rapidocr>=3.9,<4
+onnxruntime>=1.20,<2
+Pillow>=11.3,<13
+SQLAlchemy>=2.0,<3
+uvicorn[standard]>=0.35,<1
