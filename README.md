@@ -138,6 +138,13 @@ API 健康检查位于 [http://127.0.0.1:8000/api/health](http://127.0.0.1:8000/
 
 ## 部署说明
 
+### Netlify 作品集 Demo
+
+仓库根目录的 `netlify.toml` 会让 Netlify 只构建 `frontend/`，并设置
+`NEXT_PUBLIC_DEMO_MODE=true`。线上页面使用仓库内的虚构示例数据，不上传文件、
+不连接 FastAPI，也不调用付费模型。将 Netlify 连接到 GitHub 的 `main` 分支后，
+后续每次合并都会触发一次完整的前端重新构建和原子部署。
+
 ### Docker Compose（单用户/私有环境）
 
 复制配置示例，并按实际域名修改前端 API 地址和后端 CORS 白名单。

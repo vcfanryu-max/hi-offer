@@ -12,6 +12,7 @@ export function BrandMark() {
 }
 
 export function BrandHeader({ action }: { action?: { href: string; label: string } }) {
+  const demoMode = process.env.NEXT_PUBLIC_DEMO_MODE === "true";
   return (
     <header className="brand-header">
       <Link href="/" className="brand-lockup" aria-label="返回 Resume Matcher 首页">
@@ -23,7 +24,7 @@ export function BrandHeader({ action }: { action?: { href: string; label: string
           {action.label}
         </Link>
       ) : (
-        <span className="local-badge">LOCAL · PRIVATE</span>
+        <span className="local-badge">{demoMode ? "PORTFOLIO · DEMO" : "LOCAL · PRIVATE"}</span>
       )}
     </header>
   );

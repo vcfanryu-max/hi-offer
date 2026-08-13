@@ -4,8 +4,11 @@ import { FormEvent, useEffect, useMemo, useState } from "react";
 import { BrandHeader } from "@/components/BrandHeader";
 import { FileDropzone } from "@/components/FileDropzone";
 import { ResultSections } from "@/components/ResultSections";
+import { DemoWorkspace } from "@/components/DemoWorkspace";
 import { api, downloadUrl } from "@/lib/api";
 import type { ApiConfig, Generation, Job, ResumeVersion } from "@/lib/types";
+
+const DEMO_MODE = process.env.NEXT_PUBLIC_DEMO_MODE === "true";
 
 const providerDefaults: Record<string, { model: string; base_url: string }> = {
   DeepSeek: { model: "deepseek-chat", base_url: "https://api.deepseek.com" },
@@ -13,7 +16,7 @@ const providerDefaults: Record<string, { model: string; base_url: string }> = {
   Custom: { model: "", base_url: "" },
 };
 
-export default function WorkspacePage() {
+function LiveWorkspace() {
   const [resume, setResume] = useState<ResumeVersion | null>(null);
   const [config, setConfig] = useState<ApiConfig | null>(null);
   const [jdMode, setJdMode] = useState<"text" | "file">("text");
@@ -197,4 +200,8 @@ export default function WorkspacePage() {
       </main>
     </div>
   );
+}
+
+export default function WorkspacePage() {
+  return DEMO_MODE ? <DemoWorkspace /> : <LiveWorkspace />;
 }
