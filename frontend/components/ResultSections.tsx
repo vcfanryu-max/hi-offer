@@ -60,7 +60,7 @@ export function ResultSections({
               </div>
             </div>
           </div>
-          <TextActionBar text={matchText} filename={`Resume_Matcher_Match_${generation.id}.md`} mime="text/markdown;charset=utf-8" />
+          <TextActionBar text={matchText} filename={`Hi_Offer_Match_${generation.id}.md`} mime="text/markdown;charset=utf-8" />
         </article>
       ) : (
         <ModuleError message={generation.match_error || "匹配分析尚未完成。"} retry={() => onRetry("match")} busy={retrying === "match"} />
@@ -69,7 +69,7 @@ export function ResultSections({
       <article className="result-panel hr-panel">
         <header className="panel-heading">
           <div><h2>生成话术</h2><span>HR MESSAGE</span></div>
-          {generation.hr_message && <TextActionBar text={generation.hr_message.message} filename={`Resume_Matcher_HR_Message_${generation.id}.txt`} />}
+          {generation.hr_message && <TextActionBar text={generation.hr_message.message} filename={`Hi_Offer_HR_Message_${generation.id}.txt`} />}
         </header>
         {generation.hr_message ? (
           <p className="hr-message">{generation.hr_message.message}</p>
@@ -81,7 +81,7 @@ export function ResultSections({
       <article className="result-panel advice-panel">
         <header className="panel-heading">
           <div><h2>修改意见</h2><span>RESUME ADVICE</span></div>
-          {generation.resume_advice && <TextActionBar text={adviceText} filename={`Resume_Matcher_Resume_Advice_${generation.id}.md`} mime="text/markdown;charset=utf-8" />}
+          {generation.resume_advice && <TextActionBar text={adviceText} filename={`Hi_Offer_Resume_Advice_${generation.id}.md`} mime="text/markdown;charset=utf-8" />}
         </header>
         {generation.resume_advice ? (
           <div className="advice-list">

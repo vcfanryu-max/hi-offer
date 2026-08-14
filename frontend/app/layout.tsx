@@ -4,7 +4,7 @@ import { GeistMono } from "geist/font/mono";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "Resume Matcher",
+  title: "Hi Offer",
   description: "Local-first 个人求职匹配工作台",
 };
 
@@ -15,4 +15,3 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
     </html>
   );
 }
-

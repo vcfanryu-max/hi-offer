@@ -20,7 +20,7 @@ export function Hero() {
       <div ref={ref} className="hero-stage" onPointerMove={move}>
         <div className="hero-orbit" aria-hidden="true" />
         <h1 className="hero-title">
-          Resume Matcher
+          Hi Offer
         </h1>
       </div>
       <p className="hero-statement">{demoMode ? "用虚构数据体验证据可追溯的简历与岗位匹配。" : "简历与岗位的证据匹配，在你的电脑上完成。"}</p>

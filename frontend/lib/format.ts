@@ -2,7 +2,7 @@ import type { Generation, MatchAnalysis, ResumeAdvice } from "./types";
 
 export function formatMatch(match: MatchAnalysis): string {
   return [
-    "# Resume Matcher - 匹配分析",
+    "# Hi Offer - 匹配分析",
     "",
     `匹配度：${match.match_score}`,
     `匹配等级：${match.fit_level ?? "旧版未记录"}`,
@@ -45,7 +45,7 @@ export function formatAdvice(advice: ResumeAdvice, generation?: Generation): str
     "",
   ]);
   return [
-    "# Resume Matcher - 简历修改建议",
+    "# Hi Offer - 简历修改建议",
     generation ? `岗位：${generation.position}` : "",
     generation ? `公司：${generation.company}` : "",
     generation ? `简历版本：Resume V${generation.resume_version_number}` : "",

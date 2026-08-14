@@ -123,17 +123,17 @@ function LiveProfilePage() {
 
                     <details className="snapshot-section" open>
                       <summary><strong>匹配分析</strong><span>MATCH ANALYSIS</span></summary>
-                      {selected.match_result ? <><TextActionBar text={matchText} filename={`Resume_Matcher_Match_${selected.id}.md`} mime="text/markdown;charset=utf-8" /><pre>{matchText}</pre></> : <p>{selected.match_error || "这次快照没有匹配分析。"}</p>}
+                      {selected.match_result ? <><TextActionBar text={matchText} filename={`Hi_Offer_Match_${selected.id}.md`} mime="text/markdown;charset=utf-8" /><pre>{matchText}</pre></> : <p>{selected.match_error || "这次快照没有匹配分析。"}</p>}
                     </details>
 
                     <details className="snapshot-section" open>
                       <summary><strong>HR 话术</strong><span>HR MESSAGE</span></summary>
-                      {selected.hr_message ? <><TextActionBar text={selected.hr_message.message} filename={`Resume_Matcher_HR_Message_${selected.id}.txt`} /><p>{selected.hr_message.message}</p></> : <p>{selected.hr_message_error || "这次快照没有生成话术。"}</p>}
+                      {selected.hr_message ? <><TextActionBar text={selected.hr_message.message} filename={`Hi_Offer_HR_Message_${selected.id}.txt`} /><p>{selected.hr_message.message}</p></> : <p>{selected.hr_message_error || "这次快照没有生成话术。"}</p>}
                     </details>
 
                     <details className="snapshot-section" open>
                       <summary><strong>简历修改意见</strong><span>RESUME ADVICE</span></summary>
-                      {selected.resume_advice ? <><TextActionBar text={adviceText} filename={`Resume_Matcher_Resume_Advice_${selected.id}.md`} mime="text/markdown;charset=utf-8" /><pre>{adviceText}</pre></> : <p>{selected.resume_advice_error || "这次快照没有修改意见。"}</p>}
+                      {selected.resume_advice ? <><TextActionBar text={adviceText} filename={`Hi_Offer_Resume_Advice_${selected.id}.md`} mime="text/markdown;charset=utf-8" /><pre>{adviceText}</pre></> : <p>{selected.resume_advice_error || "这次快照没有修改意见。"}</p>}
                     </details>
 
                     <footer className="snapshot-meta">Prompt Snapshot · {Object.entries(selected.prompt_versions ?? {}).map(([key, value]) => `${key}:${value ?? "legacy"}`).join(" · ")}。历史结果不会被新 Prompt 覆盖。</footer>
