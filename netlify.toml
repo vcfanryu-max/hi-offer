@@ -5,5 +5,5 @@
 
 [build.environment]
   NODE_VERSION = "20"
-  NEXT_PUBLIC_DEMO_MODE = "true"
+  NEXT_PUBLIC_STATIC_EXPORT = "true"
   NETLIFY_NEXT_PLUGIN_SKIP = "true"
