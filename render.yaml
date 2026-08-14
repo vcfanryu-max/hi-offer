@@ -1,0 +1,16 @@
+services:
+  - type: web
+    name: hi-offer-api
+    runtime: docker
+    dockerfilePath: ./Dockerfile.backend
+    healthCheckPath: /api/health
+    autoDeploy: true
+    envVars:
+      - key: DEBUG
+        value: "false"
+      - key: RESUME_MATCHER_DATA_DIR
+        value: /app/data
+      - key: RESUME_MATCHER_CORS_ORIGINS
+        value: https://hi-offer-portfolio-demo.netlify.app
+      - key: RESUME_MATCHER_ACCESS_TOKEN
+        sync: false

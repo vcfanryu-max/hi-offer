@@ -5,6 +5,7 @@ import { BrandHeader } from "@/components/BrandHeader";
 import { FileDropzone } from "@/components/FileDropzone";
 import { ResultSections } from "@/components/ResultSections";
 import { DemoWorkspace } from "@/components/DemoWorkspace";
+import { AccessGate } from "@/components/AccessGate";
 import { api, downloadUrl } from "@/lib/api";
 import type { ApiConfig, Generation, Job, ResumeVersion } from "@/lib/types";
 
@@ -203,5 +204,5 @@ function LiveWorkspace() {
 }
 
 export default function WorkspacePage() {
-  return DEMO_MODE ? <DemoWorkspace /> : <LiveWorkspace />;
+  return DEMO_MODE ? <DemoWorkspace /> : <AccessGate><LiveWorkspace /></AccessGate>;
 }

@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { BrandHeader } from "@/components/BrandHeader";
 import { FileDropzone } from "@/components/FileDropzone";
 import { TextActionBar } from "@/components/TextActionBar";
+import { AccessGate } from "@/components/AccessGate";
 import { api, downloadUrl } from "@/lib/api";
 import { formatAdvice, formatMatch } from "@/lib/format";
 import type { ApiConfig, Generation, ResumeVersion } from "@/lib/types";
@@ -12,7 +13,7 @@ function date(value: string) {
   return new Intl.DateTimeFormat("zh-CN", { year: "numeric", month: "2-digit", day: "2-digit" }).format(new Date(value));
 }
 
-export default function ProfilePage() {
+function LiveProfilePage() {
   const [versions, setVersions] = useState<ResumeVersion[]>([]);
   const [config, setConfig] = useState<ApiConfig | null>(null);
   const [records, setRecords] = useState<Generation[]>([]);
@@ -145,4 +146,8 @@ export default function ProfilePage() {
       </main>
     </div>
   );
+}
+
+export default function ProfilePage() {
+  return <AccessGate><LiveProfilePage /></AccessGate>;
 }

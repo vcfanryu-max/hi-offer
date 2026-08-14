@@ -46,6 +46,13 @@ button { color: inherit; }
 
 .page-shell { min-height: 100dvh; background: var(--color-paper); }
 
+.access-page { display: grid; grid-template-rows: auto 1fr; }
+.access-card { width: min(100% - 2rem, 34rem); margin: clamp(3rem, 10vh, 8rem) auto; align-self: start; padding: clamp(1.5rem, 5vw, 3rem); border: var(--rule-hair) solid var(--color-rule); border-radius: var(--radius-lg); background: var(--color-paper-2); }
+.access-card h1 { margin: var(--space-sm) 0; font-family: var(--font-display); font-size: clamp(2rem, 7vw, 4rem); line-height: .95; letter-spacing: -.055em; }
+.access-card p { color: var(--color-muted); }
+.access-card form { display: grid; gap: var(--space-md); margin-block-start: var(--space-xl); }
+.access-card .button { justify-self: start; }
+
 .brand-header {
   min-height: 5.5rem;
   display: flex;

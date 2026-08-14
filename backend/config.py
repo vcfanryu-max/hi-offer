@@ -6,6 +6,7 @@ from pathlib import Path
 
 PROJECT_ROOT = Path(__file__).resolve().parents[1]
 DEBUG_MODE = os.getenv("DEBUG", "").strip().casefold() in {"1", "true", "yes", "on"}
+ACCESS_TOKEN = os.getenv("RESUME_MATCHER_ACCESS_TOKEN", "").strip()
 DATA_DIR = Path(os.getenv("RESUME_MATCHER_DATA_DIR", PROJECT_ROOT / "data")).resolve()
 DATABASE_PATH = DATA_DIR / "app.db"
 RESUME_DIR = DATA_DIR / "resumes"

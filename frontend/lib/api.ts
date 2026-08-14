@@ -1,6 +1,16 @@
 import type { ApiConfig, Generation, Job, ResumeVersion } from "./types";
 
 export const API_BASE = process.env.NEXT_PUBLIC_API_BASE ?? "http://127.0.0.1:8000";
+const ACCESS_TOKEN_KEY = "resume-matcher-access-token";
+
+export const getAccessToken = () =>
+  typeof window === "undefined" ? "" : window.sessionStorage.getItem(ACCESS_TOKEN_KEY) ?? "";
+
+export const setAccessToken = (token: string) => {
+  if (typeof window === "undefined") return;
+  if (token) window.sessionStorage.setItem(ACCESS_TOKEN_KEY, token);
+  else window.sessionStorage.removeItem(ACCESS_TOKEN_KEY);
+};
 
 export class ApiError extends Error {
   constructor(message: string, public status: number) {
@@ -21,7 +31,10 @@ export async function request<T>(path: string, init?: RequestInit): Promise<T> {
   try {
     response = await fetch(`${API_BASE}${path}`, {
       ...init,
-      headers: init?.body instanceof FormData ? init.headers : { "Content-Type": "application/json", ...init?.headers },
+      headers: {
+        ...(init?.body instanceof FormData ? init.headers : { "Content-Type": "application/json", ...init?.headers }),
+        ...(getAccessToken() ? { "X-Access-Token": getAccessToken() } : {}),
+      },
       cache: "no-store",
     });
   } catch {
@@ -63,4 +76,7 @@ export const api = {
     request<Generation>(`/api/generations/${id}/retry/${module}`, { method: "POST" }),
 };
 
-export const downloadUrl = (path: string) => `${API_BASE}${path}`;
+export const downloadUrl = (path: string) => {
+  const token = getAccessToken();
+  return token ? `${API_BASE}${path}?access_token=${encodeURIComponent(token)}` : `${API_BASE}${path}`;
+};

@@ -1,13 +1,14 @@
 from __future__ import annotations
 
 from contextlib import asynccontextmanager
+import secrets
 
 from fastapi import FastAPI, Request
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
 
 from backend.api import generations, jobs, prompts, resumes, settings
-from backend.config import CORS_ORIGINS, DEBUG_MODE
+from backend.config import ACCESS_TOKEN, CORS_ORIGINS, DEBUG_MODE
 from backend.db import init_db
 from backend.errors import UserFacingError
 
@@ -25,8 +26,25 @@ app.add_middleware(
     allow_origins=list(CORS_ORIGINS),
     allow_credentials=False,
     allow_methods=["GET", "POST", "PUT", "PATCH", "DELETE"],
-    allow_headers=["Content-Type"],
+    allow_headers=["Content-Type", "X-Access-Token"],
 )
+
+
+@app.middleware("http")
+async def require_access_token(request: Request, call_next):
+    """Protect deployed API data while keeping local development frictionless."""
+    if (
+        ACCESS_TOKEN
+        and request.url.path.startswith("/api/")
+        and request.url.path != "/api/health"
+        and request.method != "OPTIONS"
+    ):
+        # Query auth is limited to browser download links, which cannot attach
+        # a custom header. Normal API requests use X-Access-Token.
+        supplied = request.headers.get("X-Access-Token", "") or request.query_params.get("access_token", "")
+        if not secrets.compare_digest(supplied, ACCESS_TOKEN):
+            return JSONResponse(status_code=401, content={"detail": "访问密码不正确。"})
+    return await call_next(request)
 
 
 @app.exception_handler(UserFacingError)

@@ -104,6 +104,8 @@ data/
 
 如果希望把数据放到另一个目录，可以设置 `RESUME_MATCHER_DATA_DIR`。发布包里的 `.env.example` 只有安全的示例值，不包含密钥。用 `uvicorn --env-file .env` 启动时，后端会读取你复制出来的本地 `.env`。
 
+公网部署时必须设置 `RESUME_MATCHER_ACCESS_TOKEN`。前端会要求输入访问密码，随后通过 `X-Access-Token` 请求头访问后端；本地未设置该变量时仍保持免密码开发模式。
+
 ### 数据边界
 
 - 简历原文件、JD 原文件、OCR 文本、数据库和历史记录默认只写入本机。
